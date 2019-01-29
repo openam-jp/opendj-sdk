@@ -30,7 +30,7 @@
 
     <parent>
         <artifactId>opendj-sdk-parent</artifactId>
-        <groupId>org.forgerock.opendj</groupId>
+        <groupId>jp.openam.opendj</groupId>
         <version>3.0.1-SNAPSHOT</version>
         <relativePath>../opendj-sdk-parent/pom.xml</relativePath>
     </parent>
@@ -80,7 +80,7 @@
 
         <!-- Testing -->
         <dependency>
-            <groupId>org.forgerock</groupId>
+            <groupId>jp.openam</groupId>
             <artifactId>forgerock-build-tools</artifactId>
             <scope>test</scope>
         </dependency>
@@ -94,7 +94,7 @@
 
         <!-- Runtime -->
         <dependency>
-            <groupId>org.forgerock.commons</groupId>
+            <groupId>jp.openam.commons</groupId>
             <artifactId>forgerock-util</artifactId>
         </dependency>
 
