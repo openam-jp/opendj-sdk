@@ -29,7 +29,7 @@
     <parent>
         <groupId>jp.openam</groupId>
         <artifactId>forgerock-parent</artifactId>
-        <version>2.0.3</version>
+        <version>2.0.7-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -77,7 +77,7 @@
 
     <properties>
         <opendj.sdk.version>3.0.1-SNAPSHOT</opendj.sdk.version>
-        <i18n-framework.version>1.4.2</i18n-framework.version>
+        <i18n-framework.version>1.4.3-SNAPSHOT</i18n-framework.version>
     </properties>
 
     <dependencyManagement>
@@ -86,7 +86,7 @@
             <dependency>
                 <groupId>jp.openam.commons</groupId>
                 <artifactId>forgerock-bom</artifactId>
-                <version>4.1.1</version>
+                <version>4.1.2-SNAPSHOT</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
