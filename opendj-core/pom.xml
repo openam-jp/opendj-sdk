@@ -22,6 +22,7 @@
   ! CDDL HEADER END
   !
   !      Copyright 2011-2015 ForgeRock AS
+  !      Portions Copyrighted 2019 Open Source Solution Technology Corporation
   !    
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -29,8 +30,8 @@
 
     <parent>
         <artifactId>opendj-sdk-parent</artifactId>
-        <groupId>org.forgerock.opendj</groupId>
-        <version>3.0.0</version>
+        <groupId>jp.openam.opendj</groupId>
+        <version>3.0.1-SNAPSHOT</version>
         <relativePath>../opendj-sdk-parent/pom.xml</relativePath>
     </parent>
 
@@ -46,7 +47,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.forgerock.commons</groupId>
+            <groupId>jp.openam.commons</groupId>
             <artifactId>i18n-core</artifactId>
         </dependency>
 
@@ -56,17 +57,17 @@
         </dependency>
 
         <dependency>
-            <groupId>org.forgerock.commons</groupId>
+            <groupId>jp.openam.commons</groupId>
             <artifactId>forgerock-util</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.forgerock.commons</groupId>
+            <groupId>jp.openam.commons</groupId>
             <artifactId>i18n-slf4j</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.forgerock</groupId>
+            <groupId>jp.openam</groupId>
             <artifactId>forgerock-build-tools</artifactId>
             <scope>test</scope>
         </dependency>
@@ -84,7 +85,7 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.forgerock.commons</groupId>
+                <groupId>jp.openam.commons</groupId>
                 <artifactId>i18n-maven-plugin</artifactId>
                 <executions>
                     <execution>
@@ -312,6 +313,7 @@
                 </reportSets>
             </plugin>
 
+            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -321,6 +323,7 @@
                     </links>
                 </configuration>
             </plugin>
+            -->
         </plugins>
     </reporting>
 </project>

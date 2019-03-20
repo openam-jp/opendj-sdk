@@ -22,20 +22,21 @@
   ! CDDL HEADER END
   !
   !      Copyright 2015 ForgeRock AS.
+  !      Portions Copyrighted 2019 Open Source Solution Technology Corporation
   !
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>org.forgerock</groupId>
+        <groupId>jp.openam</groupId>
         <artifactId>forgerock-parent</artifactId>
-        <version>2.0.3</version>
+        <version>2.0.7-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.forgerock.opendj</groupId>
+    <groupId>jp.openam.opendj</groupId>
     <artifactId>opendj-sdk-bom</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.1-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -45,60 +46,18 @@
         which are known to be compatible with each other.
     </description>
     <inceptionYear>2011</inceptionYear>
-    <url>http://opendj.forgerock.org</url>
+    <url>https://github.com/openam-jp/opendj-sdk</url>
 
     <issueManagement>
-        <system>Jira</system>
-        <url>https://bugster.forgerock.org/jira/browse/OPENDJSDK</url>
+        <system>GitHub</system>
+        <url>https://github.com/openam-jp/opendj-sdk/issues</url>
     </issueManagement>
 
-    <mailingLists>
-        <mailingList>
-            <name>OpenDJ Users Mailing List</name>
-            <archive>http://lists.forgerock.org/pipermail/opendj/</archive>
-            <subscribe>https://lists.forgerock.org/mailman/listinfo/opendj/</subscribe>
-            <unsubscribe>https://lists.forgerock.org/mailman/listinfo/opendj/</unsubscribe>
-            <post>opendj@forgerock.org</post>
-        </mailingList>
-
-        <mailingList>
-            <name>OpenDJ Developers Mailing List</name>
-            <archive>http://lists.forgerock.org/pipermail/opendj-dev/</archive>
-            <subscribe>https://lists.forgerock.org/mailman/listinfo/opendj-dev/</subscribe>
-            <unsubscribe>https://lists.forgerock.org/mailman/listinfo/opendj-dev/</unsubscribe>
-            <post>opendj-dev@forgerock.org</post>
-        </mailingList>
-    </mailingLists>
-
     <scm>
-        <url>https://stash.forgerock.org/projects/OPENDJ/repos/opendj-sdk/browse</url>
-        <connection>scm:git:ssh://git@stash.forgerock.org:7999/opendj/opendj-sdk.git</connection>
-        <developerConnection>scm:git:ssh://git@stash.forgerock.org:7999/opendj/opendj-sdk.git</developerConnection>
-        <tag>3.0.0</tag>
+        <connection>scm:git:https://github.com/openam-jp/opendj-sdk.git</connection>
+        <developerConnection>scm:git:git@github.com:openam-jp/opendj-sdk.git</developerConnection>
+        <url>https://github.com/openam-jp/opendj-sdk</url>
     </scm>
-
-    <ciManagement>
-        <system>jenkins</system>
-        <url>https://ci.forgerock.org/view/OpenDJ/job/OpenDJ%20-%20SDK%20-%20postcommit</url>
-        <notifiers>
-            <notifier>
-                <type>mail</type>
-                <sendOnError>true</sendOnError>
-                <sendOnFailure>true</sendOnFailure>
-                <sendOnSuccess>false</sendOnSuccess>
-                <sendOnWarning>false</sendOnWarning>
-                <address>opendj-dev@forgerock.org</address>
-            </notifier>
-        </notifiers>
-    </ciManagement>
-
-    <distributionManagement>
-        <site>
-            <id>forgerock.org</id>
-            <name>OpenDJ Community</name>
-            <url>${site.distribution.url}</url>
-        </site>
-    </distributionManagement>
 
     <licenses>
         <license>
@@ -112,70 +71,35 @@
         </license>
     </licenses>
 
-    <repositories>
-        <repository>
-            <id>forgerock-staging-repository</id>
-            <name>ForgeRock Release Repository</name>
-            <url>http://maven.forgerock.org/repo/releases</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-
-        <repository>
-            <id>forgerock-snapshots-repository</id>
-            <name>ForgeRock Snapshot Repository</name>
-            <url>http://maven.forgerock.org/repo/snapshots</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </repository>
-
-        <repository>
-            <id>jvnet-nexus-snapshots</id>
-            <url>https://maven.java.net/content/repositories/snapshots</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
     <modules>
         <module>opendj-sdk-parent</module>
     </modules>
 
     <properties>
-        <site.distribution.url>
-            scp://community.internal.forgerock.com/var/www/vhosts/opendj.forgerock.org/httpdocs
-        </site.distribution.url>
-
-        <opendj.sdk.version>3.0.0</opendj.sdk.version>
-        <i18n-framework.version>1.4.2</i18n-framework.version>
+        <opendj.sdk.version>3.0.1-SNAPSHOT</opendj.sdk.version>
+        <i18n-framework.version>1.4.3-SNAPSHOT</i18n-framework.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <!-- ForgeRock BOM -->
             <dependency>
-                <groupId>org.forgerock.commons</groupId>
+                <groupId>jp.openam.commons</groupId>
                 <artifactId>forgerock-bom</artifactId>
-                <version>4.1.1</version>
+                <version>4.1.2-SNAPSHOT</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
 
             <!-- I18N framework -->
             <dependency>
-                <groupId>org.forgerock.commons</groupId>
+                <groupId>jp.openam.commons</groupId>
                 <artifactId>i18n-core</artifactId>
                 <version>${i18n-framework.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.forgerock.commons</groupId>
+                <groupId>jp.openam.commons</groupId>
                 <artifactId>i18n-slf4j</artifactId>
                 <version>${i18n-framework.version}</version>
             </dependency>
@@ -183,25 +107,25 @@
 
             <!-- OpenDJ SDK -->
             <dependency>
-                <groupId>org.forgerock.opendj</groupId>
+                <groupId>jp.openam.opendj</groupId>
                 <artifactId>opendj-core</artifactId>
                 <version>${opendj.sdk.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.forgerock.opendj</groupId>
+                <groupId>jp.openam.opendj</groupId>
                 <artifactId>opendj-cli</artifactId>
                 <version>${opendj.sdk.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.forgerock.opendj</groupId>
+                <groupId>jp.openam.opendj</groupId>
                 <artifactId>opendj-grizzly</artifactId>
                 <version>${opendj.sdk.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.forgerock.opendj</groupId>
+                <groupId>jp.openam.opendj</groupId>
                 <artifactId>opendj-rest2ldap</artifactId>
                 <version>${opendj.sdk.version}</version>
             </dependency>
