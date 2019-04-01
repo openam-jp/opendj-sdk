@@ -23,12 +23,16 @@
  *
  *      Copyright 2010 Sun Microsystems, Inc.
  *      Portions Copyright 2011-2015 ForgeRock AS
+ *      Portions Copyright 2019 Open Source Solution Technology Corporation
  */
 
 package org.forgerock.opendj.ldap;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -36,7 +40,10 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javax.net.ssl.KeyManager;
+import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.X509KeyManager;
 import javax.security.auth.callback.Callback;
 import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.callback.NameCallback;
@@ -75,6 +82,7 @@ import org.forgerock.opendj.ldap.responses.SearchResultEntry;
 
 import com.forgerock.opendj.ldap.controls.AccountUsabilityRequestControl;
 import com.forgerock.opendj.ldap.controls.AccountUsabilityResponseControl;
+
 import org.forgerock.util.Options;
 
 import static org.forgerock.opendj.ldap.LdapException.*;
@@ -548,12 +556,28 @@ public class LDAPServer implements ServerConnectionFactory<LDAPClientContext, In
         if (isRunning) {
             return;
         }
-        sslContext = new SSLContextBuilder().getSSLContext();
+
+        sslContext = new SSLContextBuilder()
+                .setKeyManager(getKeyManager())
+                .getSSLContext();
         listener = new LDAPListener(findFreeSocketAddress(), getInstance(),
                         Options.defaultOptions().set(CONNECT_MAX_BACKLOG, 4096));
         isRunning = true;
     }
 
+    private X509KeyManager getKeyManager() throws Exception {
+        KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
+        keyStore.load(ClassLoader.getSystemResourceAsStream("testserver.jks"), 
+                "secret".toCharArray());
+
+        final KeyManagerFactory kmf = 
+                KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+        kmf.init(keyStore, "secret".toCharArray());
+
+        X509KeyManager x509km = (X509KeyManager) kmf.getKeyManagers()[0];
+        return x509km;
+    }
+    
     /**
      * Stops the server.
      */
