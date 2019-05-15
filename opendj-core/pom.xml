@@ -157,6 +157,13 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <includes>
+                        <include>**/*.class</include>
+                        <include>**/services/*</include>
+                        <include>**/*.jks</include>
+                    </includes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
