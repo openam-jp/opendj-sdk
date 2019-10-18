@@ -23,6 +23,7 @@
  *
  *      Copyright 2009-2010 Sun Microsystems, Inc.
  *      Portions Copyright 2012-2014 ForgeRock AS.
+ *      Portions Copyrighted 2019 OGIS-RI Co., Ltd.
  */
 package org.forgerock.opendj.ldap;
 
@@ -45,7 +46,7 @@ import org.forgerock.util.time.TimeService;
 
 import static org.fest.assertions.Fail.*;
 import static org.forgerock.opendj.ldap.spi.LdapPromises.*;
-import static org.mockito.Matchers.*;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 /**

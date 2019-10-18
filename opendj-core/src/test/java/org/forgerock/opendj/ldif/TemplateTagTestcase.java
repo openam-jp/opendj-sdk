@@ -22,11 +22,12 @@
  *
  *
  *      Copyright 2013-2015 ForgeRock AS.
+ *
+ *      Portions Copyrighted 2019 OGIS-RI Co., Ltd.
  */
 package org.forgerock.opendj.ldif;
 
 import static org.fest.assertions.Assertions.*;
-import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;

@@ -22,6 +22,8 @@
  *
  *
  *      Copyright 2014 ForgeRock AS.
+ *
+ *      Portions Copyrighted 2019 OGIS-RI Co., Ltd.
  */
 package org.forgerock.opendj.ldap.schema;
 
@@ -35,7 +37,6 @@ import org.testng.annotations.Test;
 
 import static org.fest.assertions.Assertions.*;
 import static org.forgerock.opendj.ldap.spi.LdapPromises.*;
-import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 /**
