@@ -325,7 +325,7 @@ public class HeartBeatConnectionFactoryTestCase extends SdkTestCase {
         when(hbcf.timeService.now()).thenReturn(11001L);
         scheduler.runAllTasks(); // Invokes HBCF.ConnectionImpl.sendHeartBeat()
         verify(ldapConnection, times(1)).searchAsync(same(HEARTBEAT),
-        		                             nullable(IntermediateResponseHandler.class),
+                                                     nullable(IntermediateResponseHandler.class),
                                                      nullable(SearchResultHandler.class));
 
         // Send fake bind response, releasing the heartbeat.
