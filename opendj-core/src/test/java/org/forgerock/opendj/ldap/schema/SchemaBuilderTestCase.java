@@ -22,6 +22,7 @@
  *
  *
  *      Portions Copyright 2012-2015 ForgeRock AS.
+ *      Portions Copyrighted 2019 OGIS-RI Co., Ltd.
  */
 package org.forgerock.opendj.ldap.schema;
 
@@ -32,7 +33,6 @@ import static org.forgerock.opendj.ldap.schema.Schema.*;
 import static org.forgerock.opendj.ldap.schema.SchemaConstants.*;
 import static org.forgerock.opendj.ldap.schema.SchemaOptions.*;
 import static org.forgerock.opendj.ldap.spi.LdapPromises.*;
-import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import org.forgerock.i18n.LocalizedIllegalArgumentException;

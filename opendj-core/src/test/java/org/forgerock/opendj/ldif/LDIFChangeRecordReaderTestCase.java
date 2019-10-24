@@ -24,6 +24,7 @@
  *      Copyright 2011 ForgeRock AS
  *      Portions copyright 2012 ForgeRock AS.
  *      Portions Copyright 2014 Manuel Gaupp
+ *      Portions Copyrighted 2019 OGIS-RI Co., Ltd.
  */
 
 package org.forgerock.opendj.ldif;
@@ -57,7 +58,6 @@ import org.forgerock.opendj.ldap.schema.SchemaValidationPolicy.Action;
 import org.testng.annotations.Test;
 
 import static org.fest.assertions.Assertions.*;
-import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 /**

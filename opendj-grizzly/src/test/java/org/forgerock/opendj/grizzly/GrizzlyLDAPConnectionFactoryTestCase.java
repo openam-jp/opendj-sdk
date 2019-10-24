@@ -22,6 +22,8 @@
  *
  *
  *     Copyright 2013-2015 ForgeRock AS.
+ *
+ *     Portions Copyrighted 2019 OGIS-RI Co., Ltd.
  */
 package org.forgerock.opendj.grizzly;
 
@@ -75,7 +77,6 @@ import static org.forgerock.opendj.ldap.TestCaseUtils.*;
 import static org.forgerock.opendj.ldap.requests.Requests.*;
 import static org.forgerock.opendj.ldap.LDAPConnectionFactory.*;
 import static org.forgerock.util.time.Duration.duration;
-import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 /**

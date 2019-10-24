@@ -22,6 +22,8 @@
  *
  *
  *      Copyright 2013-2015 ForgeRock AS.
+ *
+ *      Portions Copyrighted 2019 OGIS-RI Co., Ltd.
  */
 
 package org.forgerock.opendj.ldap;
@@ -44,10 +46,6 @@ import static org.forgerock.opendj.ldap.spi.LdapPromises.newFailedLdapPromise;
 import static org.forgerock.opendj.ldap.spi.LdapPromises.newSearchLdapPromise;
 import static org.forgerock.opendj.ldap.spi.LdapPromises.newSuccessfulLdapPromise;
 import static org.forgerock.util.time.Duration.duration;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.*;
 
 import java.util.LinkedList;
@@ -159,16 +157,16 @@ public class HeartBeatConnectionFactoryTestCase extends SdkTestCase {
         final SearchResultLdapPromiseImpl heartBeatPromise =
                 newSearchLdapPromise(-1, HEARTBEAT, null, null, ldapConnection);
         when(ldapConnection.searchAsync(same(HEARTBEAT),
-                                        any(IntermediateResponseHandler.class),
-                                        any(SearchResultHandler.class)))
+                                        nullable(IntermediateResponseHandler.class),
+                                        nullable(SearchResultHandler.class)))
                 .thenReturn(heartBeatPromise);
         when(hbcf.timeService.now()).thenReturn(11000L);
         scheduler.runAllTasks(); // Send the heartbeat.
 
         // Capture the heartbeat search result handler.
         verify(ldapConnection, times(2)).searchAsync(same(HEARTBEAT),
-                                                     any(IntermediateResponseHandler.class),
-                                                     any(SearchResultHandler.class));
+                                                     nullable(IntermediateResponseHandler.class),
+                                                     nullable(SearchResultHandler.class));
         assertThat(hbc.isValid()).isTrue(); // Not checked yet.
 
         /*
@@ -176,11 +174,11 @@ public class HeartBeatConnectionFactoryTestCase extends SdkTestCase {
          * heart beat completes.
          */
         hbc.bindAsync(newSimpleBindRequest());
-        verify(ldapConnection, times(0)).bindAsync(any(BindRequest.class), any(IntermediateResponseHandler.class));
+        verify(ldapConnection, times(0)).bindAsync(nullable(BindRequest.class), nullable(IntermediateResponseHandler.class));
 
         // Send fake heartbeat response, releasing the bind request.
         heartBeatPromise.getWrappedPromise().handleResult(newResult(SUCCESS));
-        verify(ldapConnection, times(1)).bindAsync(any(BindRequest.class), any(IntermediateResponseHandler.class));
+        verify(ldapConnection, times(1)).bindAsync(nullable(BindRequest.class), nullable(IntermediateResponseHandler.class));
     }
 
     @Test
@@ -201,7 +199,7 @@ public class HeartBeatConnectionFactoryTestCase extends SdkTestCase {
         assertThat(hbc).isNotNull();
         assertThat(hbc.isValid()).isTrue();
 
-        verify(mockResultHandler).handleResult(any(Connection.class));
+        verify(mockResultHandler).handleResult(nullable(Connection.class));
         verifyNoMoreInteractions(mockResultHandler);
     }
 
@@ -321,14 +319,14 @@ public class HeartBeatConnectionFactoryTestCase extends SdkTestCase {
         when(hbcf.timeService.now()).thenReturn(11000L);
         hbc.bindAsync(newSimpleBindRequest());
 
-        verify(ldapConnection, times(1)).bindAsync(any(BindRequest.class), any(IntermediateResponseHandler.class));
+        verify(ldapConnection, times(1)).bindAsync(nullable(BindRequest.class), nullable(IntermediateResponseHandler.class));
 
         // Verify no heartbeat is sent because there is a bind in progress.
         when(hbcf.timeService.now()).thenReturn(11001L);
         scheduler.runAllTasks(); // Invokes HBCF.ConnectionImpl.sendHeartBeat()
         verify(ldapConnection, times(1)).searchAsync(same(HEARTBEAT),
-                                                     any(IntermediateResponseHandler.class),
-                                                     any(SearchResultHandler.class));
+                                                     nullable(IntermediateResponseHandler.class),
+                                                     nullable(SearchResultHandler.class));
 
         // Send fake bind response, releasing the heartbeat.
         when(hbcf.timeService.now()).thenReturn(11099L);
@@ -350,14 +348,14 @@ public class HeartBeatConnectionFactoryTestCase extends SdkTestCase {
         // Send another bind request which will timeout.
         when(hbcf.timeService.now()).thenReturn(20000L);
         hbc.bindAsync(newSimpleBindRequest());
-        verify(ldapConnection, times(1)).bindAsync(any(BindRequest.class), any(IntermediateResponseHandler.class));
+        verify(ldapConnection, times(1)).bindAsync(nullable(BindRequest.class), nullable(IntermediateResponseHandler.class));
 
         // Verify no heartbeat is sent because there is a bind in progress.
         when(hbcf.timeService.now()).thenReturn(20001L);
         scheduler.runAllTasks(); // Invokes HBCF.ConnectionImpl.sendHeartBeat()
         verify(ldapConnection, times(1)).searchAsync(same(HEARTBEAT),
-                                                     any(IntermediateResponseHandler.class),
-                                                     any(SearchResultHandler.class));
+                                                     nullable(IntermediateResponseHandler.class),
+                                                     nullable(SearchResultHandler.class));
 
         // Check that lack of bind response acts as heartbeat timeout.
         assertThat(hbc.isValid()).isTrue();
@@ -375,7 +373,7 @@ public class HeartBeatConnectionFactoryTestCase extends SdkTestCase {
         hbc = hbcf.getConnection();
         hbc.bindAsync(newSimpleBindRequest());
 
-        verify(ldapConnection, times(1)).bindAsync(any(BindRequest.class), any(IntermediateResponseHandler.class));
+        verify(ldapConnection, times(1)).bindAsync(nullable(BindRequest.class), nullable(IntermediateResponseHandler.class));
 
         /*
          * Now attempt the heartbeat which should not happen because there is a
@@ -385,8 +383,8 @@ public class HeartBeatConnectionFactoryTestCase extends SdkTestCase {
         // Attempt to send the heartbeat.
         scheduler.runAllTasks();
         verify(ldapConnection, times(1)).searchAsync(same(HEARTBEAT),
-                                                     any(IntermediateResponseHandler.class),
-                                                     any(SearchResultHandler.class));
+                                                     nullable(IntermediateResponseHandler.class),
+                                                     nullable(SearchResultHandler.class));
 
         // Send fake bind response, releasing the heartbeat.
         promise.getWrappedPromise().handleResult(newBindResult(SUCCESS));
@@ -396,8 +394,8 @@ public class HeartBeatConnectionFactoryTestCase extends SdkTestCase {
         // Attempt to send the heartbeat.
         scheduler.runAllTasks();
         verify(ldapConnection, times(2)).searchAsync(same(HEARTBEAT),
-                                                     any(IntermediateResponseHandler.class),
-                                                     any(SearchResultHandler.class));
+                                                     nullable(IntermediateResponseHandler.class),
+                                                     nullable(SearchResultHandler.class));
     }
 
     @Test
@@ -431,7 +429,7 @@ public class HeartBeatConnectionFactoryTestCase extends SdkTestCase {
             }
         });
         TransportProvider provider = mock(TransportProvider.class);
-        when(provider.getLDAPConnectionFactory(anyString(), anyInt(), any(Options.class))).thenReturn(ldapFactory);
+        when(provider.getLDAPConnectionFactory(nullable(String.class), anyInt(), nullable(Options.class))).thenReturn(ldapFactory);
         scheduler = new MockScheduler();
 
         // Create heart beat connection factory.
@@ -450,7 +448,7 @@ public class HeartBeatConnectionFactoryTestCase extends SdkTestCase {
 
     private BindResultLdapPromiseImpl mockBindAsyncResponse() {
         final BindResultLdapPromiseImpl bindPromise = newBindLdapPromise(-1, null, null, null, ldapConnection);
-        when(ldapConnection.bindAsync(any(BindRequest.class), any(IntermediateResponseHandler.class)))
+        when(ldapConnection.bindAsync(nullable(BindRequest.class), nullable(IntermediateResponseHandler.class)))
                 .thenReturn(bindPromise);
         return bindPromise;
     }
@@ -461,9 +459,9 @@ public class HeartBeatConnectionFactoryTestCase extends SdkTestCase {
             final List<ConnectionEventListener> listeners,
             final ResultCode resultCode) {
         // @Checkstyle:off
-        when(mockConnection.searchAsync(any(SearchRequest.class),
-                                        any(IntermediateResponseHandler.class),
-                                        any(SearchResultHandler.class))).thenAnswer(new Answer<LdapPromise<Result>>() {
+        when(mockConnection.searchAsync(nullable(SearchRequest.class),
+                                        nullable(IntermediateResponseHandler.class),
+                                        nullable(SearchResultHandler.class))).thenAnswer(new Answer<LdapPromise<Result>>() {
             @Override
             public LdapPromise<Result> answer(final InvocationOnMock invocation) throws Throwable {
                 if (resultCode == null) {
@@ -488,8 +486,8 @@ public class HeartBeatConnectionFactoryTestCase extends SdkTestCase {
 
     private void verifyHeartBeatSent(final LDAPConnectionImpl connection, final int times) {
         verify(connection, times(times)).searchAsync(same(HEARTBEAT),
-                                                     any(IntermediateResponseHandler.class),
-                                                     any(SearchResultHandler.class));
+                                                     nullable(IntermediateResponseHandler.class),
+                                                     nullable(SearchResultHandler.class));
     }
 
     private static LDAPConnectionImpl mockLDAPConnectionImpl(final List<ConnectionEventListener> listeners) {
@@ -504,7 +502,7 @@ public class HeartBeatConnectionFactoryTestCase extends SdkTestCase {
                 listeners.add(listener);
                 return null;
             }
-        }).when(mockConnection).addConnectionEventListener(any(ConnectionEventListener.class));
+        }).when(mockConnection).addConnectionEventListener(nullable(ConnectionEventListener.class));
 
         doAnswer(new Answer<Void>() {
             @Override
@@ -514,7 +512,7 @@ public class HeartBeatConnectionFactoryTestCase extends SdkTestCase {
                 listeners.remove(listener);
                 return null;
             }
-        }).when(mockConnection).removeConnectionEventListener(any(ConnectionEventListener.class));
+        }).when(mockConnection).removeConnectionEventListener(nullable(ConnectionEventListener.class));
 
         return mockConnection;
     }

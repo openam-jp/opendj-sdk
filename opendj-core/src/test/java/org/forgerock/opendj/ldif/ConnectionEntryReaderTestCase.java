@@ -22,6 +22,8 @@
  *
  *
  *      Copyright 2011-2014 ForgeRock AS
+ *
+ *      Portions Copyrighted 2019 OGIS-RI Co., Ltd.
  */
 
 package org.forgerock.opendj.ldif;
@@ -49,7 +51,6 @@ import static org.fest.assertions.Fail.*;
 import static org.forgerock.opendj.ldap.LdapException.*;
 import static org.forgerock.opendj.ldap.responses.Responses.*;
 import static org.forgerock.opendj.ldap.spi.LdapPromises.*;
-import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 /**
