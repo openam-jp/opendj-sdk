@@ -29,14 +29,14 @@
     <parent>
         <groupId>jp.openam</groupId>
         <artifactId>forgerock-parent</artifactId>
-        <version>2.0.7-SNAPSHOT</version>
+        <version>2.0.7</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>jp.openam.opendj</groupId>
     <artifactId>opendj-sdk-bom</artifactId>
-    <version>3.0.1-SNAPSHOT</version>
+    <version>3.0.1</version>
 
     <packaging>pom</packaging>
 
@@ -57,6 +57,7 @@
         <connection>scm:git:https://github.com/openam-jp/opendj-sdk.git</connection>
         <developerConnection>scm:git:git@github.com:openam-jp/opendj-sdk.git</developerConnection>
         <url>https://github.com/openam-jp/opendj-sdk</url>
+      <tag>3.0.1</tag>
     </scm>
 
     <licenses>
@@ -76,8 +77,8 @@
     </modules>
 
     <properties>
-        <opendj.sdk.version>3.0.1-SNAPSHOT</opendj.sdk.version>
-        <i18n-framework.version>1.4.3-SNAPSHOT</i18n-framework.version>
+        <opendj.sdk.version>3.0.1</opendj.sdk.version>
+        <i18n-framework.version>1.4.3</i18n-framework.version>
     </properties>
 
     <dependencyManagement>
@@ -86,7 +87,7 @@
             <dependency>
                 <groupId>jp.openam.commons</groupId>
                 <artifactId>forgerock-bom</artifactId>
-                <version>4.1.2-SNAPSHOT</version>
+                <version>4.1.2</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
