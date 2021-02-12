@@ -105,7 +105,7 @@ public class StartTLSExtendedRequestTestCase extends RequestsTestCase {
     public void testUnmodifiableSetAuthenticationID(final StartTLSExtendedRequest original)
             throws NoSuchAlgorithmException {
         final StartTLSExtendedRequest unmodifiable = (StartTLSExtendedRequest) unmodifiableOf(original);
-        unmodifiable.setSSLContext(SSLContext.getInstance("SSL"));
+        unmodifiable.setSSLContext(SSLContext.getInstance("TLS"));
     }
 
     @Test(dataProvider = "StartTLSExtendedRequests")
