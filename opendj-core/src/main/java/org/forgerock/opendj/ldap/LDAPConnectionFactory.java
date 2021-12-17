@@ -23,13 +23,14 @@
  *
  *      Copyright 2009-2010 Sun Microsystems, Inc.
  *      Portions Copyright 2011-2015 ForgeRock AS.
+ *      Portions copyright 2021 OGIS-RI Co., Ltd.
  */
 
 package org.forgerock.opendj.ldap;
 
 import static com.forgerock.opendj.ldap.CoreMessages.HBCF_CONNECTION_CLOSED_BY_CLIENT;
-import static com.forgerock.opendj.ldap.CoreMessages.HBCF_HEARTBEAT_FAILED;
 import static com.forgerock.opendj.ldap.CoreMessages.HBCF_HEARTBEAT_TIMEOUT;
+import static com.forgerock.opendj.ldap.CoreMessages.ERR_CONNECTION_UNEXPECTED;
 import static com.forgerock.opendj.ldap.CoreMessages.LDAP_CONNECTION_CONNECT_TIMEOUT;
 import static com.forgerock.opendj.util.StaticUtils.DEFAULT_SCHEDULER;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -508,7 +509,7 @@ public final class LDAPConnectionFactory extends CommonLDAPOptions implements Co
                         connectException = newHeartBeatTimeoutError();
                     } else {
                         connectException = newLdapException(ResultCode.CLIENT_SIDE_SERVER_DOWN,
-                                                            HBCF_HEARTBEAT_FAILED.get(),
+                                                            ERR_CONNECTION_UNEXPECTED.get(e),
                                                             e);
                     }
                     if (promise.tryHandleException(connectException)) {

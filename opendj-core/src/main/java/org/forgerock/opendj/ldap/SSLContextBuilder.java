@@ -22,6 +22,7 @@
  *
  *
  *      Copyright 2010 Sun Microsystems, Inc.
+ *      Portions copyright 2021 OGIS-RI Co., Ltd.
  */
 
 package org.forgerock.opendj.ldap;
@@ -67,36 +68,13 @@ public final class SSLContextBuilder {
     public static final String PROTOCOL_SSL = "SSL";
 
     /**
-     * SSL protocol: supports SSL version 2 or higher; may support other
-     * versions.
-     */
-    public static final String PROTOCOL_SSL2 = "SSLv2";
-
-    /**
-     * SSL protocol: supports SSL version 3; may support other versions.
-     */
-    public static final String PROTOCOL_SSL3 = "SSLv3";
-
-    /**
      * SSL protocol: supports some version of TLS; may support other versions.
      */
     public static final String PROTOCOL_TLS = "TLS";
 
-    /**
-     * SSL protocol: supports RFC 2246: TLS version 1.0 ; may support other
-     * versions.
-     */
-    public static final String PROTOCOL_TLS1 = "TLSv1";
-
-    /**
-     * SSL protocol: supports RFC 4346: TLS version 1.1 ; may support other
-     * versions.
-     */
-    public static final String PROTOCOL_TLS1_1 = "TLSv1.1";
-
     private TrustManager trustManager;
     private KeyManager keyManager;
-    private String protocol = PROTOCOL_TLS1;
+    private String protocol = PROTOCOL_TLS;
     private SecureRandom random;
 
     /** These are mutually exclusive. */
@@ -159,12 +137,12 @@ public final class SSLContextBuilder {
     }
 
     /**
-     * Sets the protocol which the SSL context should use. By default, TLSv1
+     * Sets the protocol which the SSL context should use. By default, TLS
      * will be used.
      *
      * @param protocol
      *            The protocol which the SSL context should use, which may be
-     *            {@code null} indicating that TLSv1 will be used.
+     *            {@code null} indicating that TLS will be used.
      * @return This SSL context builder.
      */
     public SSLContextBuilder setProtocol(final String protocol) {
