@@ -22,7 +22,7 @@
   ! CDDL HEADER END
   !
   !      Copyright 2011-2015 ForgeRock AS
-  !      Portions Copyrighted 2019 Open Source Solution Technology Corporation
+  !      Portions Copyrighted 2019-2023 OSSTech Corporation
   !      Portions Copyrighted 2019 OGIS-RI Co., Ltd.
   !    
 -->
@@ -32,7 +32,7 @@
     <parent>
         <artifactId>opendj-sdk-parent</artifactId>
         <groupId>jp.openam.opendj</groupId>
-        <version>3.0.1</version>
+        <version>3.0.1.1</version>
         <relativePath>../opendj-sdk-parent/pom.xml</relativePath>
     </parent>
 
